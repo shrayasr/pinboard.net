@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>pinboard.net</id>
+    <version>0.0.0</version>
+    <title>pinboard.net</title>
+    <authors>Shrayas</authors>
+    <owners>Shrayas</owners>
+    <licenseUrl>https://github.com/shrayasr/pinboard.net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/shrayasr/pinboard.net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A fully featured C# wrapper for pinboard.in</description>
+    <releaseNotes>Placeholder release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>api wrapper pinboard bookmarking</tags>
+  </metadata>
+</package>
