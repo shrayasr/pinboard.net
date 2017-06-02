@@ -63,5 +63,18 @@ namespace pinboard.net.Endpoints
 
             return Add(bookmark);
         }
+
+        public Task<Result> Delete(string url)
+        {
+            var requestURL = PostsURL
+                                .AppendPathSegment("delete");
+
+            if (url.IsEmpty())
+                throw new ArgumentException("URL is a mandatory field to delete a bookmark");
+
+            requestURL.SetQueryParam("url", url);
+
+            return MakeRequestAsync<Result>(requestURL);
+        }
     }
 }
