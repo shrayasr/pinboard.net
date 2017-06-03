@@ -28,6 +28,8 @@ namespace pinboard.net.Models
         {
             Tags = new List<string>();
             Shared = null;
+
+            CreatedDate = DateTimeOffset.MinValue;
         }
     }
 }
