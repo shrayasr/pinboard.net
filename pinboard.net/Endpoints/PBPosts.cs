@@ -2,6 +2,7 @@
 using pinboard.net.Models;
 using pinboard.net.Util;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -18,6 +19,39 @@ namespace pinboard.net.Endpoints
                        .AppendPathSegment("update");
 
             return MakeRequestAsync<LastUpdate>(url);
+        }
+
+        public Task<GetResult> Get(
+            List<string> tags = null, 
+            DateTime? date = null, 
+            string url = "", 
+            bool? meta = null)
+        {
+            if (tags.Count > 3)
+                throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+            var requestURL = PostsURL
+                                .AppendPathSegment("get");
+
+            if (tags.HasValues())
+            {
+                var tagsString = string.Join(",", tags);
+                requestURL.SetQueryParam("tag", tagsString);
+            }
+
+            if (date.HasValue && date.Value != DateTimeOffset.MinValue)
+            {
+                requestURL.SetQueryParam("dt", date.Value.ToString(DATE_FORMAT));
+            }
+
+            if (url.HasValue())
+            {
+                requestURL.SetQueryParam("url", url);
+            }
+
+            requestURL.SetQueryParam("meta", GetYesNo(meta));
+
+            return MakeRequestAsync<GetResult>(requestURL);
         }
 
         public Task<Result> Add(Bookmark bookmark)
