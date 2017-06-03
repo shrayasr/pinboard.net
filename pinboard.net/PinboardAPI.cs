@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using pinboard.net.Endpoints;
+using System;
 using System.Net.Http;
-using System.Text;
 
 namespace pinboard.net
 {
-    class PinboardAPI : IDisposable
+    public class PinboardAPI : IDisposable
     {
         private HttpClient _httpClient;
         private string _apiToken;
