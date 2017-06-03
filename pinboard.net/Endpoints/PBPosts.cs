@@ -44,7 +44,7 @@ namespace pinboard.net.Endpoints
             var commaSeparatedTags = string.Join(",", bookmark.Tags);
             url.SetQueryParam("tags", commaSeparatedTags);
 
-            if (bookmark.CreatedDate != DateTime.MinValue)
+            if (bookmark.CreatedDate != DateTimeOffset.MinValue)
                 url.SetQueryParam("dt", bookmark.CreatedDate.ToString(DATETIME_FORMAT));
 
             url.SetQueryParam("replace", GetYesNo(bookmark.Replace));
