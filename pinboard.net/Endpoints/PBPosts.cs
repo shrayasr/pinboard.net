@@ -13,6 +13,11 @@ namespace pinboard.net.Endpoints
         public PBPosts(string apiToken, HttpClient httpClient)
             : base(apiToken, httpClient) { }
 
+        /// <summary>
+        /// Returns the most recent time a bookmark was added, updated or deleted.
+        /// Use this before calling All to see if the data has changed since the last fetch.
+        /// </summary>
+        /// <returns>Last updated timestamp</returns>
         public Task<LastUpdate> GetLastUpdate()
         {
             var url = PostsURL
@@ -21,6 +26,14 @@ namespace pinboard.net.Endpoints
             return MakeRequestAsync<LastUpdate>(url);
         }
 
+        /// <summary>
+        /// Returns one or more posts on a single day matching the arguments. If no date or url is given, date of most recent bookmark will be used.
+        /// </summary>
+        /// <param name="tags">filter by up to three tags</param>
+        /// <param name="date">return results bookmarked on this day</param>
+        /// <param name="url">return bookmark for this URL</param>
+        /// <param name="meta">include a change detection signature in a meta attribute</param>
+        /// <returns>Filtered records</returns>
         public Task<GetResult> Get(
             List<string> tags = null, 
             DateTime? date = null, 
@@ -54,6 +67,11 @@ namespace pinboard.net.Endpoints
             return MakeRequestAsync<GetResult>(requestURL);
         }
 
+        /// <summary>
+        /// Add a bookmark
+        /// </summary>
+        /// <param name="bookmark">The bookmark to add. URL and Description are mandatory</param>
+        /// <returns>Result of the Add operation</returns>
         public Task<Result> Add(Bookmark bookmark)
         {
             var url = PostsURL
@@ -88,6 +106,12 @@ namespace pinboard.net.Endpoints
             return MakeRequestAsync<Result>(url);
         }
 
+        /// <summary>
+        /// Update a bookmark
+        /// </summary>
+        /// <param name="bookmark">Bookmark to update. The key by which the bookmark is updated is the URL. Changing the URL will cause a new bookmark to be added</param>
+        /// <param name="updateTime">Update the time also?</param>
+        /// <returns>Result of update operation</returns>
         public Task<Result> Update(Bookmark bookmark, bool updateTime = false)
         {
             if (updateTime)
@@ -98,6 +122,11 @@ namespace pinboard.net.Endpoints
             return Add(bookmark);
         }
 
+        /// <summary>
+        /// Delete a bookmark
+        /// </summary>
+        /// <param name="url">The bookmark identified by this URL is deleted</param>
+        /// <returns>Result of the delete operation</returns>
         public Task<Result> Delete(string url)
         {
             var requestURL = PostsURL
