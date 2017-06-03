@@ -26,14 +26,14 @@ namespace pinboard.net.Endpoints
             DateTime? date = null, 
             string url = "", 
             bool? meta = null)
-        {
-            if (tags.Count > 3)
-                throw new ArgumentException("Filter can only contain 3 tags at the most.");
-
+       {
             var requestURL = PostsURL
                                 .AppendPathSegment("get");
 
-            if (tags.HasValues())
+            if (tags != null && tags.Count > 3)
+                throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+            if (tags != null && tags.HasValues())
             {
                 var tagsString = string.Join(",", tags);
                 requestURL.SetQueryParam("tag", tagsString);
