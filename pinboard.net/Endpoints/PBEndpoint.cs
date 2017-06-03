@@ -15,22 +15,22 @@ namespace pinboard.net.Endpoints
         public const string DATETIME_FORMAT = "yyyy-MM-ddTHH:mm:ssK";
         public const string DATE_FORMAT = "yyyy-MM-dd";
 
-        public string PostsURL
+        protected string PostsURL
         {
             get { return BASEURL + "/posts"; }
         }
 
-        public string TagsURL
+        protected string TagsURL
         {
             get { return BASEURL + "/tags"; }
         }
 
-        public string UsersURL
+        protected string UsersURL
         {
             get { return BASEURL + "/user"; }
         }
 
-        public string NotesURL
+        protected string NotesURL
         {
             get { return BASEURL + "/notes"; }
         }
