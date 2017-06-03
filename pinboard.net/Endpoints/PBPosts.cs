@@ -68,6 +68,34 @@ namespace pinboard.net.Endpoints
         }
 
         /// <summary>
+        /// Returns a list of the user's most recent posts, filtered by tag.
+        /// </summary>
+        /// <param name="tags">filter by up to three tags</param>
+        /// <param name="count">number of results to return. Default is 15, max is 100</param>
+        /// <returns>Filtered list of bookmarks</returns>
+        public Task<RecentResult> Recent(List<string> tags = null, int count = 15)
+        {
+            var requestURL = PostsURL
+                                .AppendPathSegment("recent");
+
+            if (tags != null && tags.Count > 3)
+                throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+            if (tags != null && tags.HasValues())
+            {
+                var tagsString = string.Join(",", tags);
+                requestURL.SetQueryParam("tag", tagsString);
+            }
+
+            if (count > 100)
+                throw new ArgumentException("Max Count is 100");
+
+            requestURL.SetQueryParam("count", count);
+
+            return MakeRequestAsync<RecentResult>(requestURL);
+        }
+
+        /// <summary>
         /// Add a bookmark
         /// </summary>
         /// <param name="bookmark">The bookmark to add. URL and Description are mandatory</param>
