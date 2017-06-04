@@ -56,5 +56,18 @@ namespace pinboard.net.Endpoints
 
             return MakeRequestAsync<TagsResult>(url);
         }
+
+        public Task<TagsResult> Rename(string from, string to)
+        {
+            if (from.IsEmpty() || to.IsEmpty())
+                throw new ArgumentException("from/to cannot be empty");
+
+            var url = TagsURL
+                        .AppendPathSegment("rename")
+                        .SetQueryParam("old", from)
+                        .SetQueryParam("new", to);
+
+            return MakeRequestAsync<TagsResult>(url);
+        }
     }
 }
