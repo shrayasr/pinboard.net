@@ -57,6 +57,12 @@ namespace pinboard.net.Endpoints
             return MakeRequestAsync<TagsResult>(url);
         }
 
+        /// <summary>
+        /// Rename an tag, or fold it in to an existing tag
+        /// </summary>
+        /// <param name="from">source tag. note: match is not case sensitive</param>
+        /// <param name="to">destination tag</param>
+        /// <returns>A result code</returns>
         public Task<TagsResult> Rename(string from, string to)
         {
             if (from.IsEmpty() || to.IsEmpty())
