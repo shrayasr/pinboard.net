@@ -1,4 +1,5 @@
 ﻿using Flurl;
+using Newtonsoft.Json;
 using pinboard.net.Models;
 using pinboard.net.Util;
 using System;
@@ -137,6 +138,41 @@ namespace pinboard.net.Endpoints
                 url.SetQueryParam("meta", meta.Value);
 
             return MakeRequestAsync<AllResult>(url);
+        }
+
+        /// <summary>
+        /// Returns a list of popular tags and recommended tags for a given URL. Popular tags are tags used site-wide for the url; recommended tags are drawn from the user's own tags.
+        /// </summary>
+        /// <param name="url">the URL to suggest tags for</param>
+        /// <returns>Popular and recommended tags for the given url</returns>
+        public Task<SuggestResult> Suggest(string url)
+        {
+            var requestURL = PostsURL
+                                .AppendPathSegment("suggest")
+                                .SetQueryParam("url", url);
+
+            return MakeRequestAsync<SuggestResult>(requestURL, (content) =>
+            {
+                dynamic d = JsonConvert.DeserializeObject(content);
+
+                var popularTagsDyn = d[0].popular;
+                var recommendedTagsDyn = d[1].recommended;
+
+                List<string> popularTags = null;
+                if (popularTagsDyn != null)
+                    popularTags = popularTagsDyn.ToObject<List<string>>();
+                
+                List<string> recommendedTags = null;
+                if (recommendedTagsDyn != null)
+                    recommendedTags = recommendedTagsDyn.ToObject<List<string>>();
+
+                return new SuggestResult
+                {
+                    Popular = popularTags,
+                    Recommended = recommendedTags
+                };
+            });
+
         }
 
         /// <summary>
