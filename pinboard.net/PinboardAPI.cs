@@ -11,6 +11,7 @@ namespace pinboard.net
 
         private Posts _posts;
         private Tags _tags;
+        private Users _users;
 
         public PinboardAPI(string apiToken)
         {
@@ -37,6 +38,17 @@ namespace pinboard.net
                     _tags = new Tags(_apiToken, _httpClient);
 
                 return _tags;
+            }
+        }
+
+        public Users Users
+        {
+            get
+            {
+                if (_users == null)
+                    _users = new Users(_apiToken, _httpClient);
+
+                return _users;
             }
         }
 
