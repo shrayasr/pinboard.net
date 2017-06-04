@@ -44,13 +44,16 @@ namespace pinboard.net.Endpoints
             var requestURL = PostsURL
                                 .AppendPathSegment("get");
 
-            if (tags != null && tags.Count > 3)
-                throw new ArgumentException("Filter can only contain 3 tags at the most.");
-
-            if (tags != null && tags.HasValues())
+            if (tags != null)
             {
-                var tagsString = string.Join(",", tags);
-                requestURL.SetQueryParam("tag", tagsString);
+                if (tags.Count > 3)
+                    throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+                if (tags.HasValues())
+                {
+                    var tagsString = string.Join(",", tags);
+                    requestURL.SetQueryParam("tag", tagsString);
+                }
             }
 
             if (date.HasValue && date.Value != DateTimeOffset.MinValue)
@@ -78,13 +81,16 @@ namespace pinboard.net.Endpoints
             var url = PostsURL
                                 .AppendPathSegment("dates");
 
-            if (tags != null && tags.Count > 3)
-                throw new ArgumentException("Filter can only contain 3 tags at the most.");
-
-            if (tags != null && tags.HasValues())
+            if (tags != null)
             {
-                var tagsString = string.Join(",", tags);
-                url.SetQueryParam("tag", tagsString);
+                if (tags.Count > 3)
+                    throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+                if (tags.HasValues())
+                {
+                    var tagsString = string.Join(",", tags);
+                    url.SetQueryParam("tag", tagsString);
+                }
             }
 
             return MakeRequestAsync<DateWisePostCounts>(url);
@@ -186,13 +192,16 @@ namespace pinboard.net.Endpoints
             var requestURL = PostsURL
                                 .AppendPathSegment("recent");
 
-            if (tags != null && tags.Count > 3)
-                throw new ArgumentException("Filter can only contain 3 tags at the most.");
-
-            if (tags != null && tags.HasValues())
+            if (tags != null)
             {
-                var tagsString = string.Join(",", tags);
-                requestURL.SetQueryParam("tag", tagsString);
+                if (tags.Count > 3)
+                    throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+                if (tags.HasValues())
+                {
+                    var tagsString = string.Join(",", tags);
+                    requestURL.SetQueryParam("tag", tagsString);
+                }
             }
 
             if (count > 100)
