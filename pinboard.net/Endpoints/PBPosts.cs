@@ -90,6 +90,56 @@ namespace pinboard.net.Endpoints
         }
 
         /// <summary>
+        /// Returns all bookmarks in the user's account.
+        /// </summary>
+        /// <param name="tags">filter by up to three tags</param>
+        /// <param name="start">offset value (default is 0)</param>
+        /// <param name="results">number of results to return. Default is all</param>
+        /// <param name="fromDate">return only bookmarks created after this time</param>
+        /// <param name="toDate">return only bookmarks created before this time</param>
+        /// <param name="meta">include a change detection signature for each bookmark</param>
+        /// <returns>Filtered list of bookmarks</returns>
+        public Task<AllResult> All(
+            List<string> tags = null,
+            int start = 0,
+            int? results = null,
+            DateTimeOffset? fromDate = null,
+            DateTimeOffset? toDate = null,
+            int? meta = null)
+        {
+            var url = PostsURL
+                        .AppendPathSegment("all");
+
+            if (tags != null)
+            {
+                if (tags.Count > 3)
+                    throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+                if (tags.HasValues())
+                {
+                    var tagsString = string.Join(",", tags);
+                    url.SetQueryParam("tag", tagsString);
+                }
+            }
+
+            url.SetQueryParam("start", start);
+
+            if (results.HasValue)
+                url.SetQueryParam("results", results.Value);
+
+            if (fromDate.HasValue)
+                url.SetQueryParam("fromdt", fromDate.Value.ToString(DATETIME_FORMAT));
+
+            if (toDate.HasValue)
+                url.SetQueryParam("todt", toDate.Value.ToString(DATETIME_FORMAT));
+
+            if (meta.HasValue)
+                url.SetQueryParam("meta", meta.Value);
+
+            return MakeRequestAsync<AllResult>(url);
+        }
+
+        /// <summary>
         /// Returns a list of the user's most recent posts, filtered by tag.
         /// </summary>
         /// <param name="tags">filter by up to three tags</param>
