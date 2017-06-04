@@ -68,6 +68,28 @@ namespace pinboard.net.Endpoints
         }
 
         /// <summary>
+        /// Returns a list of dates with the number of posts at each date.
+        /// </summary>
+        /// <param name="tags">filter by up to three tags</param>
+        /// <returns>List of dates, filtered</returns>
+        public Task<DatesResult> Dates(List<string> tags = null)
+        {
+            var url = PostsURL
+                                .AppendPathSegment("dates");
+
+            if (tags != null && tags.Count > 3)
+                throw new ArgumentException("Filter can only contain 3 tags at the most.");
+
+            if (tags != null && tags.HasValues())
+            {
+                var tagsString = string.Join(",", tags);
+                url.SetQueryParam("tag", tagsString);
+            }
+
+            return MakeRequestAsync<DatesResult>(url);
+        }
+
+        /// <summary>
         /// Returns a list of the user's most recent posts, filtered by tag.
         /// </summary>
         /// <param name="tags">filter by up to three tags</param>

@@ -26,7 +26,7 @@ namespace pinboard.net.Models
             [JsonConverter(typeof(YesNoConverter))]
             public bool ToRead { get; set; }
 
-            [JsonConverter(typeof(TagsConverter))]
+            [JsonConverter(typeof(TagsConverter), " ")]
             public List<string> Tags { get; set; }
         }
     }
