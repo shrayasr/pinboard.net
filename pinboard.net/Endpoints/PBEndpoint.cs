@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Flurl;
 using Newtonsoft.Json;
+using System;
 
 namespace pinboard.net.Endpoints
 {
@@ -51,6 +52,18 @@ namespace pinboard.net.Endpoints
             var content = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<T>(content);
+        }
+
+        protected async Task<T> MakeRequestAsync<T>(Url url, Func<string, T> postProcessAction)
+        {
+            url
+             .SetQueryParam("auth_token", _apiToken)
+             .SetQueryParam("format", "json");
+
+            var response = await _httpClient.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync();
+
+            return postProcessAction(content);
         }
 
         protected string GetYesNo(bool? value)
