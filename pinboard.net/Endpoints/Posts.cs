@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace pinboard.net.Endpoints
 {
-    public partial class Posts : Endpoint
+    public class Posts : Endpoint
     {
         public Posts(string apiToken, HttpClient httpClient)
             : base(apiToken, httpClient) { }
