@@ -1,6 +1,8 @@
 ﻿using Flurl;
 using Newtonsoft.Json;
 using pinboard.net.Models;
+using pinboard.net.Util;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -36,6 +38,18 @@ namespace pinboard.net.Endpoints
 
                 return allTags;
             });
+        }
+
+        public Task<TagsResult> Delete(string tag)
+        {
+            if (tag.IsEmpty())
+                throw new ArgumentException("Tag cannot be empty");
+
+            var url = TagsURL
+                        .AppendPathSegment("delete")
+                        .SetQueryParam("tag", tag);
+
+            return MakeRequestAsync<TagsResult>(url);
         }
     }
 }
