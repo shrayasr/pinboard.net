@@ -64,12 +64,9 @@ namespace pinboard.net
             }
         }
 
-        #region IDisposable Members
         public void Dispose()
         {
             _httpClient.Dispose();
         }
-        #endregion
-
     }
 }
