@@ -8,8 +8,8 @@ A fully featured C# wrapper for the [pinboard.in](https://pinboard.in) API.
 
 ## Usage
 
-To start, retrieve the Pinboard API Token from the [password] page on the
-website.
+To start, retrieve the Pinboard API Token from the
+[password](https://pinboard.in/settings/password) page on the website.
 
 ```
 var pb = new PinboardAPI(apiToken);
