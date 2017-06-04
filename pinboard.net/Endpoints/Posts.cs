@@ -208,7 +208,7 @@ namespace pinboard.net.Endpoints
         /// </summary>
         /// <param name="bookmark">The bookmark to add. URL and Description are mandatory</param>
         /// <returns>Result of the Add operation</returns>
-        public Task<Result> Add(Bookmark bookmark)
+        public Task<PostsResult> Add(Bookmark bookmark)
         {
             var url = PostsURL
                         .AppendPathSegment("add");
@@ -239,7 +239,7 @@ namespace pinboard.net.Endpoints
             url.SetQueryParam("shared", GetYesNo(bookmark.Shared));
             url.SetQueryParam("toread", GetYesNo(bookmark.ToRead));
 
-            return MakeRequestAsync<Result>(url);
+            return MakeRequestAsync<PostsResult>(url);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace pinboard.net.Endpoints
         /// <param name="bookmark">Bookmark to update. The key by which the bookmark is updated is the URL. Changing the URL will cause a new bookmark to be added</param>
         /// <param name="updateTime">Update the time also?</param>
         /// <returns>Result of update operation</returns>
-        public Task<Result> Update(Bookmark bookmark, bool updateTime = false)
+        public Task<PostsResult> Update(Bookmark bookmark, bool updateTime = false)
         {
             if (updateTime)
                 bookmark.CreatedDate = DateTimeOffset.Now;
@@ -263,7 +263,7 @@ namespace pinboard.net.Endpoints
         /// </summary>
         /// <param name="url">The bookmark identified by this URL is deleted</param>
         /// <returns>Result of the delete operation</returns>
-        public Task<Result> Delete(string url)
+        public Task<PostsResult> Delete(string url)
         {
             var requestURL = PostsURL
                                 .AppendPathSegment("delete");
@@ -273,7 +273,7 @@ namespace pinboard.net.Endpoints
 
             requestURL.SetQueryParam("url", url);
 
-            return MakeRequestAsync<Result>(requestURL);
+            return MakeRequestAsync<PostsResult>(requestURL);
         }
     }
 }

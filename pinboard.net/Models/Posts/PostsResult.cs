@@ -3,7 +3,7 @@ using pinboard.net.Util.Converters;
 
 namespace pinboard.net.Models
 {
-    public class Result
+    public class PostsResult
     {
         [JsonProperty("result_code")]
         [JsonConverter(typeof(ResultCodeConverter))]
