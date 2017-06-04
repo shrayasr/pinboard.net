@@ -2,6 +2,7 @@
 
 namespace pinboard.net.Models
 {
-    public class AllResult 
-        : List<GetResult.Bookmark> { }
+    public class AllPosts
+        : List<DayWisePosts.Bookmark>
+    { }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace pinboard.net.Models
 {
-    public class GetResult
+    public class DayWisePosts
     {
         public DateTimeOffset Date { get; set; }
         public string User { get; set; }

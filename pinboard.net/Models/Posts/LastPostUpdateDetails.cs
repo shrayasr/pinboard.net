@@ -3,7 +3,7 @@ using System;
 
 namespace pinboard.net.Models
 {
-    public class LastUpdate
+    public class LastPostUpdateDetails
     {
         [JsonProperty("update_time")]
         public DateTimeOffset UpdateTime { get; set; }

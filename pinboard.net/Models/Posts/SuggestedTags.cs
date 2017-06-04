@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace pinboard.net.Models
 {
-    public class SuggestResult
+    public class SuggestedTags
     {
         public List<string> Popular { get; set; }
         public List<string> Recommended { get; set; }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace pinboard.net.Endpoints
 {
-    public class PBPosts : PBEndpoint
+    public partial class Posts : Endpoint
     {
-        public PBPosts(string apiToken, HttpClient httpClient)
+        public Posts(string apiToken, HttpClient httpClient)
             : base(apiToken, httpClient) { }
 
         /// <summary>
@@ -19,12 +19,12 @@ namespace pinboard.net.Endpoints
         /// Use this before calling All to see if the data has changed since the last fetch.
         /// </summary>
         /// <returns>Last updated timestamp</returns>
-        public Task<LastUpdate> GetLastUpdate()
+        public Task<LastPostUpdateDetails> GetLastUpdate()
         {
             var url = PostsURL
                        .AppendPathSegment("update");
 
-            return MakeRequestAsync<LastUpdate>(url);
+            return MakeRequestAsync<LastPostUpdateDetails>(url);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace pinboard.net.Endpoints
         /// <param name="url">return bookmark for this URL</param>
         /// <param name="meta">include a change detection signature in a meta attribute</param>
         /// <returns>Filtered records</returns>
-        public Task<GetResult> Get(
+        public Task<DayWisePosts> Get(
             List<string> tags = null, 
             DateTime? date = null, 
             string url = "", 
@@ -65,7 +65,7 @@ namespace pinboard.net.Endpoints
 
             requestURL.SetQueryParam("meta", GetYesNo(meta));
 
-            return MakeRequestAsync<GetResult>(requestURL);
+            return MakeRequestAsync<DayWisePosts>(requestURL);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace pinboard.net.Endpoints
         /// </summary>
         /// <param name="tags">filter by up to three tags</param>
         /// <returns>List of dates, filtered</returns>
-        public Task<DatesResult> Dates(List<string> tags = null)
+        public Task<DateWisePostCounts> Dates(List<string> tags = null)
         {
             var url = PostsURL
                                 .AppendPathSegment("dates");
@@ -87,7 +87,7 @@ namespace pinboard.net.Endpoints
                 url.SetQueryParam("tag", tagsString);
             }
 
-            return MakeRequestAsync<DatesResult>(url);
+            return MakeRequestAsync<DateWisePostCounts>(url);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace pinboard.net.Endpoints
         /// <param name="toDate">return only bookmarks created before this time</param>
         /// <param name="meta">include a change detection signature for each bookmark</param>
         /// <returns>Filtered list of bookmarks</returns>
-        public Task<AllResult> All(
+        public Task<AllPosts> All(
             List<string> tags = null,
             int start = 0,
             int? results = null,
@@ -137,7 +137,7 @@ namespace pinboard.net.Endpoints
             if (meta.HasValue)
                 url.SetQueryParam("meta", meta.Value);
 
-            return MakeRequestAsync<AllResult>(url);
+            return MakeRequestAsync<AllPosts>(url);
         }
 
         /// <summary>
@@ -145,13 +145,13 @@ namespace pinboard.net.Endpoints
         /// </summary>
         /// <param name="url">the URL to suggest tags for</param>
         /// <returns>Popular and recommended tags for the given url</returns>
-        public Task<SuggestResult> Suggest(string url)
+        public Task<SuggestedTags> Suggest(string url)
         {
             var requestURL = PostsURL
                                 .AppendPathSegment("suggest")
                                 .SetQueryParam("url", url);
 
-            return MakeRequestAsync<SuggestResult>(requestURL, (content) =>
+            return MakeRequestAsync<SuggestedTags>(requestURL, (content) =>
             {
                 dynamic d = JsonConvert.DeserializeObject(content);
 
@@ -166,7 +166,7 @@ namespace pinboard.net.Endpoints
                 if (recommendedTagsDyn != null)
                     recommendedTags = recommendedTagsDyn.ToObject<List<string>>();
 
-                return new SuggestResult
+                return new SuggestedTags
                 {
                     Popular = popularTags,
                     Recommended = recommendedTags
@@ -181,7 +181,7 @@ namespace pinboard.net.Endpoints
         /// <param name="tags">filter by up to three tags</param>
         /// <param name="count">number of results to return. Default is 15, max is 100</param>
         /// <returns>Filtered list of bookmarks</returns>
-        public Task<RecentResult> Recent(List<string> tags = null, int count = 15)
+        public Task<RecentPosts> Recent(List<string> tags = null, int count = 15)
         {
             var requestURL = PostsURL
                                 .AppendPathSegment("recent");
@@ -200,7 +200,7 @@ namespace pinboard.net.Endpoints
 
             requestURL.SetQueryParam("count", count);
 
-            return MakeRequestAsync<RecentResult>(requestURL);
+            return MakeRequestAsync<RecentPosts>(requestURL);
         }
 
         /// <summary>

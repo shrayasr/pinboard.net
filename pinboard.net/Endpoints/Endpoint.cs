@@ -6,7 +6,7 @@ using System;
 
 namespace pinboard.net.Endpoints
 {
-    public class PBEndpoint
+    public class Endpoint
     {
         private string _apiToken;
         private HttpClient _httpClient;
@@ -36,7 +36,7 @@ namespace pinboard.net.Endpoints
             get { return BASEURL + "/notes"; }
         }
 
-        public PBEndpoint(string apiToken, HttpClient httpClient)
+        public Endpoint(string apiToken, HttpClient httpClient)
         {
             _apiToken = apiToken;
             _httpClient = httpClient;

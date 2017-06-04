@@ -9,7 +9,8 @@ namespace pinboard.net
         private HttpClient _httpClient;
         private string _apiToken;
 
-        private PBPosts _posts;
+        private Posts _posts;
+        private Tags _tags;
 
         public PinboardAPI(string apiToken)
         {
@@ -17,14 +18,25 @@ namespace pinboard.net
             _apiToken = apiToken;
         }
 
-        public PBPosts Posts
+        public Posts Posts
         {
             get
             {
                 if (_posts == null)
-                    _posts = new PBPosts(_apiToken, _httpClient);
+                    _posts = new Posts(_apiToken, _httpClient);
 
                 return _posts;
+            }
+        }
+
+        public Tags Tags
+        {
+            get
+            {
+                if (_tags == null)
+                    _tags = new Tags(_apiToken, _httpClient);
+
+                return _tags;
             }
         }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace pinboard.net.Models
 {
-    public class DatesResult
+    public class DateWisePostCounts
     {
         public string User { get; set; }
 
