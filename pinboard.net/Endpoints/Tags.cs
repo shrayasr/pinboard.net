@@ -40,6 +40,11 @@ namespace pinboard.net.Endpoints
             });
         }
 
+        /// <summary>
+        /// Delete an existing tag.
+        /// </summary>
+        /// <param name="tag">The tag to delete</param>
+        /// <returns>A result code</returns>
         public Task<TagsResult> Delete(string tag)
         {
             if (tag.IsEmpty())
