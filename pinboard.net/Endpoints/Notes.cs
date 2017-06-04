@@ -16,7 +16,7 @@ namespace pinboard.net.Endpoints
         /// <summary>
         /// Returns a list of the user's notes
         /// </summary>
-        /// <returns></returns>
+        /// <returns>All the notes</returns>
         public Task<AllNotes> List()
         {
             var url = NotesURL.AppendPathSegment("list");
