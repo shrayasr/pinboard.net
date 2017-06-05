@@ -6,6 +6,15 @@ A fully featured C# wrapper for the [pinboard.in](https://pinboard.in) API.
 
     PM> Install-Package pinboard.net
 
+Since this is written atop [.Net Standard](https://docs.microsoft.com/en-us/dotnet/standard/library) [1.4](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard1.4.md), it will run on the following platforms:
+
+* .NET Core 1.0
+* .NET Framework 4.6.1
+* Mono 4.6
+* Xamarin.iOS 10.0
+* Xamarin.Android 7.0
+* Universal Windows Platform 10
+
 ## Usage
 
 To start, retrieve the Pinboard API Token from the
