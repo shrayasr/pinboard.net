@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pinboard.net", "pinboard.net\pinboard.net.csproj", "{AC9C1FBC-BF68-45EB-B957-1BE52F123A34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pinboard.net", "pinboard.net\pinboard.net.csproj", "{AC9C1FBC-BF68-45EB-B957-1BE52F123A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pinboard.net.UnitTests", "pinboard.net.UnitTests\pinboard.net.UnitTests.csproj", "{5122B4E2-5C37-40FE-9201-02C5F275EA02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{AC9C1FBC-BF68-45EB-B957-1BE52F123A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC9C1FBC-BF68-45EB-B957-1BE52F123A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC9C1FBC-BF68-45EB-B957-1BE52F123A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5122B4E2-5C37-40FE-9201-02C5F275EA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5122B4E2-5C37-40FE-9201-02C5F275EA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5122B4E2-5C37-40FE-9201-02C5F275EA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5122B4E2-5C37-40FE-9201-02C5F275EA02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC86C3CE-10C6-46F4-9F23-EF06D4F77A3D}
 	EndGlobalSection
 EndGlobal
