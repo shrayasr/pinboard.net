@@ -38,7 +38,7 @@ namespace pinboard.net.Util.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var list = (List<string>)value;
+            var list = (IEnumerable<string>)value;
             var delimitedList = string.Join(_delimiter, list);
 
             writer.WriteValue(delimitedList);
