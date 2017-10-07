@@ -21,9 +21,9 @@ namespace pinboard.net.UnitTests
         }
 
         [Theory]
-        [InlineData(null,"no")]
-        [InlineData(false,"no")]
-        [InlineData(true,"yes")]
+        [InlineData(null, "no")]
+        [InlineData(false, "no")]
+        [InlineData(true, "yes")]
         public void ShouldWriteCorrectValue(object value, string expected)
         {
             var jsonWriterMock = new Mock<JsonWriter>();

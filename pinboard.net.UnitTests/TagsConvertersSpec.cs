@@ -25,8 +25,8 @@ namespace pinboard.net.UnitTests
 
         [Theory]
         [InlineData(new string[] { }, "", "")]
-        [InlineData(new[] {"dummyTag", "dummyTag"}, "dummyTag dummyTag", " ")]
-        [InlineData(new[] {"dummyTag", "dummyTag"}, "dummyTag,dummyTag", ",")]
+        [InlineData(new[] {"dummy", "dummy"}, "dummy dummy", " ")]
+        [InlineData(new[] {"dummy", "dummy"}, "dummy,dummy", ",")]
         public void ShouldReturnListSplitByDelimeter(string[] expected, string inputTags, string delimeter)
         {
             var jsonReaderMock = new Mock<JsonReader>();
@@ -39,8 +39,8 @@ namespace pinboard.net.UnitTests
 
         [Theory]
         [InlineData(new string[] { }, "", "")]
-        [InlineData(new[] { "dummyTag", "dummyTag" }, "dummyTag dummyTag", " ")]
-        [InlineData(new[] { "dummyTag", "dummyTag" }, "dummyTag,dummyTag", ",")]
+        [InlineData(new[] { "dummy", "dummy" }, "dummy dummy", " ")]
+        [InlineData(new[] { "dummy", "dummy" }, "dummy,dummy", ",")]
         public void ShouldWriteCorrectValue(string[] input, string expected, string delimeter)
         {
             var jsonWriterMock = new Mock<JsonWriter>();
