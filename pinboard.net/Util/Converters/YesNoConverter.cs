@@ -17,7 +17,7 @@ namespace pinboard.net.Util.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            bool? val = (bool?)value;
+            var val = (bool?)value;
 
             if (val.HasValue && val.Value)
                 writer.WriteValue("yes");
