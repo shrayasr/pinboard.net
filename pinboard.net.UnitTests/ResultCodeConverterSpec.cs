@@ -12,7 +12,7 @@ namespace pinboard.net.UnitTests
         [InlineData(typeof(decimal), false)]
         [InlineData(typeof(float), false)]
         [InlineData(typeof(DateTime), false)]
-        public void ShouldBeAbleToConvertCorrectType(Type type, bool expected)
+        public void ShouldConvertOnlyCorrectType(Type type, bool expected)
         {
             var sut = new ResultCodeConverter();
             var canConvertType = sut.CanConvert(type);
