@@ -6,8 +6,8 @@ namespace pinboard.net
 {
     public class PinboardAPI : IDisposable
     {
+        private readonly string _apiToken;
         private HttpClient _httpClient;
-        private string _apiToken;
 
         private Posts _posts;
         private Tags _tags;

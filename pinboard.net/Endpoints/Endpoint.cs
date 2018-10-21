@@ -8,7 +8,7 @@ namespace pinboard.net.Endpoints
 {
     public class Endpoint
     {
-        private string _apiToken;
+        private readonly string _apiToken;
         private HttpClient _httpClient;
 
         private const string BASEURL = "https://api.pinboard.in/v1";
