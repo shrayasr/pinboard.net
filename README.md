@@ -1,3 +1,7 @@
+[![Travis](https://img.shields.io/travis/grantwinney/pinboard.net.svg?branch=master)](https://travis-ci.org/grantwinney/pinboard.net)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![NuGet](https://img.shields.io/nuget/v/pinboard.net.svg)](https://www.nuget.org/packages/pinboard.net)
+
 # Pinboard.net
 
 A fully featured C# wrapper for the [pinboard.in](https://pinboard.in) API.
