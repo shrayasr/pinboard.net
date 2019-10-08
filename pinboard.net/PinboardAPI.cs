@@ -14,9 +14,9 @@ namespace pinboard.net
         private Users _users;
         private Notes _notes;
 
-        public PinboardAPI(string apiToken)
+        public PinboardAPI(string apiToken, HttpClient httpClient = null)
         {
-            _httpClient = new HttpClient();
+            _httpClient = httpClient ?? new HttpClient();
             _apiToken = apiToken;
         }
 
