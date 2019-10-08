@@ -1,0 +1,10 @@
+dist: xenial
+language: csharp
+solution: pinboard.net.sln
+mono: none
+dotnet: 2.0.0
+script:
+  - cd pinboard.net.UnitTests
+  - dotnet restore
+  - dotnet build
+  - dotnet test
